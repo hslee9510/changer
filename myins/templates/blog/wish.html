@@ -1,0 +1,7 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {% for wish in wishs%}
+    <h2><a href="{% url 'wish_detail' pk=wish.pk %}">{{wish.title}}</a></h2>
+  {% endfor %}
+{% endblock %}

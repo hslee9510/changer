@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div class='wish'>
+    {% if wish.date %}
+      <div class="Date">
+        {{ wish.date}}
+      </div>
+    {% endif %}
+    <h1>{{ wish.title}}</h1>
+    <p>{{wish.text|linebreaksbr}}</p>
+  </div>
+{% endblock %}

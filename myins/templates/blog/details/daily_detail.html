@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <div class='daily'>
+    {% if daily.date %}
+      <div class="Date">
+        {{ daliy.date}}
+      </div>
+    {% endif %}
+    <a href="{% url 'daily_edit' pk=daily.pk %}">Edit this daily!</a>
+    <h1>{{ daily.title}}</h1>
+    <p>{{daily.text|linebreaksbr}}</p>
+  </div>
+{% endblock %}

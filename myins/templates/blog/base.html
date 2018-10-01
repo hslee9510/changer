@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> I MY ME MINE - Have some fun! </title>
+    <style>
+    body{
+      margin:0;
+    }
+  
+
+    #Main{
+      background-color: #000000;
+
+      padding:50px;
+      text-align: center;
+      font-size:80px;
+      margin:0;
+      border-bottom:solid gray;
+    }
+    a{
+      text-decoration: none;
+      color: black ;
+    }
+    h2{
+
+    }
+    ul{
+      list-style-type: none;
+      padding-left:0;
+      border-right:solid gray;
+
+      margin:0;
+      padding-left:10px;
+    }
+
+    #grid{
+      display: grid;
+      padding-left:20px;
+      grid-template-columns: 150px 1fr;
+    }
+    #contents{
+      padding-left:20px;
+    }
+    #main{
+      color:white;
+    }
+    </style>
+  </head>
+  <body>
+    <h1 id="Main"><a id="main" href="{% url 'index' %}">LEE HYUN SUNG</a></h1>
+
+    <div id="grid">
+      <ul>
+        <li>
+          <h2><a href="{% url 'daily' %}">Daily HS</a></h2>
+        </li>
+        <li>
+          <h2><a href="{% url 'todo' %}">To Do</a></h2>
+        </li>
+        <li>
+          <h2><a href="{% url 'wish' %}">Wish</a></h2>
+        </li>
+        <li>
+          <h2><a href="{% url 'inspiration' %}">Inspiration</a></h2>
+        </li>
+        <li>
+          <h2><a href="{% url 'reference' %}">Reference</a></h2>
+        </li>
+        <li>
+          <h2><a href="{% url 'trophy' %}">Trophy</a></h2>
+        </li>
+      </ul>
+      <div id="contents">
+      {% block content %}
+
+      {% endblock %}
+      </div>
+    </div>
+
+  </body>
+</html>

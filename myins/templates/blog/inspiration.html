@@ -1,0 +1,7 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  {% for inspiration in inspirations%}
+    <h2><a href="{% url 'inspiration_detail' pk=inspiration.pk %}">{{inspiration.title}}</a></h2>
+  {% endfor %}
+{% endblock %}

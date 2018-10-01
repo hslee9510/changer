@@ -1,0 +1,8 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+  <p><a href="{% url 'daily_new' %}" class="top-menu">ADD NEW DAILY</a></p>
+  {% for daily in dailys%}
+    <h2><a href="{% url 'daily_detail' pk=daily.pk %}">{{daily.title}}</a></h2>
+  {% endfor %}
+{% endblock %}
