@@ -7,6 +7,7 @@
         {{ wish.date}}
       </div>
     {% endif %}
+    <a href="{% url 'wish_edit' pk=wish.pk %}">Edit this Wish!</a>
     <h1>{{ wish.title}}</h1>
     <p>{{wish.text|linebreaksbr}}</p>
   </div>

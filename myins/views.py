@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.utils import timezone
 from .models import  Daily,Todo,Wish,Inspiration,Reference,Trophy
-from .forms import DailyForm, TodoForm
+from .forms import DailyForm, TodoForm, WishForm, InspirationForm, ReferenceForm, TrophyForm
 
 def index(request):
     dailys = Daily.objects.filter(date__lte=timezone.now()).order_by('date')
@@ -77,26 +77,118 @@ def wish_detail(request,pk):
     wish = get_object_or_404(Wish, pk=pk)
     return render(request, 'blog/details/wish_detail.html',{'wish':wish})
 
+def wish_new(request):
+    if request.method == "POST":
+        form = WishForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('wish_detail', pk=post.pk)
+    else:
+        form = WishForm()
+    return render(request, 'blog/form/wish_edit.html', {'form': form})
+
+def wish_edit(request, pk):
+    wish = get_object_or_404(Wish, pk=pk)
+    if request.method == "POST":
+        form = WishForm(request.POST, instance=wish)
+        if form.is_valid():
+            wish = form.save(commit=False)
+            wish.save()
+            return redirect('wish_detail', pk=wish.pk)
+    else:
+        form =WishForm(instance=wish)
+    return render(request, 'blog/form/wish_edit.html', {'form': form})
+
 def inspiration(request):
     inspirations=Inspiration.objects.filter(date__lte=timezone.now()).order_by('date')
     return render(request, 'blog/inspiration.html',{'inspirations':inspirations})
 
 def inspiration_detail(request,pk):
-    inspiration = get_object_or_404(Todo, pk=pk)
+    inspiration = get_object_or_404(Inspiration, pk=pk)
     return render(request, 'blog/details/inspiration_detail.html',{'inspiration':inspiration})
+
+def inspiration_new(request):
+    if request.method == "POST":
+        form = InspirationForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('inspiration_detail', pk=post.pk)
+    else:
+        form = InspirationForm()
+    return render(request, 'blog/form/inspiration_edit.html', {'form': form})
+
+def inspiration_edit(request, pk):
+    inspiration = get_object_or_404(Inspiration, pk=pk)
+    if request.method == "POST":
+        form = InspirationForm(request.POST, instance=inspiration)
+        if form.is_valid():
+            inspiration = form.save(commit=False)
+            inspiration.save()
+            return redirect('inspiration_detail', pk=inspiration.pk)
+    else:
+        form =InspirationForm(instance=inspiration)
+    return render(request, 'blog/form/inspiration_edit.html', {'form': form})
 
 def reference(request):
     references = Reference.objects.filter(date__lte=timezone.now()).order_by('date')
     return render(request, 'blog/reference.html',{'references':references})
 
 def reference_detail(request,pk):
-    reference = get_object_or_404(Todo, pk=pk)
+    reference = get_object_or_404(Reference, pk=pk)
     return render(request, 'blog/details/reference_detail.html',{'reference':reference})
+
+def reference_new(request):
+    if request.method == "POST":
+        form = ReferenceForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('reference_detail', pk=post.pk)
+    else:
+        form = ReferenceForm()
+    return render(request, 'blog/form/reference_edit.html', {'form': form})
+
+def reference_edit(request, pk):
+    reference = get_object_or_404(Reference, pk=pk)
+    if request.method == "POST":
+        form = ReferenceForm(request.POST, instance=reference)
+        if form.is_valid():
+            reference = form.save(commit=False)
+            reference.save()
+            return redirect('reference_detail', pk=reference.pk)
+    else:
+        form =ReferenceForm(instance=reference)
+    return render(request, 'blog/form/reference_edit.html', {'form': form})
 
 def trophy(request):
     trophys = Trophy.objects.filter(date__lte=timezone.now()).order_by('date')
     return render(request, 'blog/trophy.html',{'trophys':trophys})
 
 def trophy_detail(request,pk):
-    trophy = get_object_or_404(Todo, pk=pk)
+    trophy = get_object_or_404(Trophy, pk=pk)
     return render(request, 'blog/details/trophy_detail.html',{'trophy':trophy})
+
+def trophy_new(request):
+    if request.method == "POST":
+        form = TrophyForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('trophy_detail', pk=post.pk)
+    else:
+        form = TrophyForm()
+    return render(request, 'blog/form/trophy_edit.html', {'form': form})
+
+def trophy_edit(request, pk):
+    trophy = get_object_or_404(Trophy, pk=pk)
+    if request.method == "POST":
+        form = TrophyForm(request.POST, instance=trophy)
+        if form.is_valid():
+            trophy = form.save(commit=False)
+            trophy.save()
+            return redirect('trophy_detail', pk=trophy.pk)
+    else:
+        form =TrophyForm(instance=trophy)
+    return render(request, 'blog/form/trophy_edit.html', {'form': form})

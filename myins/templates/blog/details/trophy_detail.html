@@ -7,7 +7,8 @@
         {{ daliy.date}}
       </div>
     {% endif %}
-    <h1>{{ daily.title}}</h1>
-    <p>{{daily.text|linebreaksbr}}</p>
+    <a href="{% url 'trophy_edit' pk=trophy.pk %}">Edit this TROPHY!</a>
+    <h1>{{ trophy.title}}</h1>
+    <p>{{trophy.text|linebreaksbr}}</p>
   </div>
 {% endblock %}

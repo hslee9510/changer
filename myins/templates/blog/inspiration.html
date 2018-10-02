@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+  <p><a href="{% url 'inspiration_new' %}" class="top-menu">ADD NEW INSPIRATION</a></p>
   {% for inspiration in inspirations%}
     <h2><a href="{% url 'inspiration_detail' pk=inspiration.pk %}">{{inspiration.title}}</a></h2>
   {% endfor %}

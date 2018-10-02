@@ -27,7 +27,7 @@ class Todo(models.Model):
 
 class Wish(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField('bucket list','Product')
+    text = models.TextField(null=True)
     type = models.BooleanField(default=False)
     date = models.DateTimeField(default=timezone.now)
 
@@ -39,7 +39,7 @@ class Wish(models.Model):
 
 class Inspiration(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField('bucket list','Product')
+    text = models.TextField(null=True)
     type = models.BooleanField(default=False)
     date = models.DateTimeField(default=timezone.now)
     def publish(self):

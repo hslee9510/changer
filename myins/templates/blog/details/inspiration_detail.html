@@ -7,7 +7,8 @@
         {{ daliy.date}}
       </div>
     {% endif %}
-    <h1>{{ daily.title}}</h1>
-    <p>{{daily.text|linebreaksbr}}</p>
+    <a href="{% url 'inspiration_edit' pk=inspiration.pk %}">Edit this INSPIRATION!</a>
+    <h1>{{inspiration.title}}</h1>
+    <p>{{inspiration.text|linebreaksbr}}</p>
   </div>
 {% endblock %}

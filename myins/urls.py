@@ -19,4 +19,12 @@ urlpatterns = [
     url(r'^daily/(?P<pk>\d+)/edit/$', views.daily_edit, name='daily_edit'),
     url(r'^todo/new/$',views.todo_new,name='todo_new'),
     url(r'^todo/(?P<pk>\d+)/edit/$', views.todo_edit, name='todo_edit'),
+    url(r'^wish/new/$',views.wish_new,name='wish_new'),
+    url(r'^wish/(?P<pk>\d+)/edit/$', views.wish_edit, name='wish_edit'),
+    url(r'^inspiration/new/$',views.inspiration_new,name='inspiration_new'),
+    url(r'^inspiration/(?P<pk>\d+)/edit/$', views.inspiration_edit, name='inspiration_edit'),
+    url(r'^reference/new/$',views.reference_new,name='reference_new'),
+    url(r'^reference/(?P<pk>\d+)/edit/$', views.reference_edit, name='reference_edit'),
+    url(r'^trophy/new/$',views.trophy_new,name='trophy_new'),
+    url(r'^trophy/(?P<pk>\d+)/edit/$', views.trophy_edit, name='trophy_edit'),
 ]
