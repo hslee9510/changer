@@ -50,7 +50,7 @@ class Inspiration(models.Model):
 
 class Reference(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField('bucket list','Product')
+    text = models.TextField(null=True)
     type = models.BooleanField(default=False)
     date = models.DateTimeField(default=timezone.now)
     def publish(self):
@@ -61,7 +61,7 @@ class Reference(models.Model):
 
 class Trophy(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField('bucket list','Product')
+    text = models.TextField(null=True)
     type = models.BooleanField(default=False)
     date = models.DateTimeField(default=timezone.now)
     def publish(self):

@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.utils import timezone
 from .models import  Daily,Todo,Wish,Inspiration,Reference,Trophy
-from .forms import DailyForm
+from .forms import DailyForm, TodoForm
 
 def index(request):
     dailys = Daily.objects.filter(date__lte=timezone.now()).order_by('date')
@@ -45,6 +45,29 @@ def todo(request):
 def todo_detail(request,pk):
     todo = get_object_or_404(Todo, pk=pk)
     return render(request, 'blog/details/todo_detail.html',{'todo':todo})
+
+def todo_new(request):
+    if request.method == "POST":
+        form = TodoForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return redirect('todo_detail', pk=post.pk)
+    else:
+        form = TodoForm()
+    return render(request, 'blog/form/todo_edit.html', {'form': form})
+
+def todo_edit(request, pk):
+    todo = get_object_or_404(Todo, pk=pk)
+    if request.method == "POST":
+        form = TodoForm(request.POST, instance=todo)
+        if form.is_valid():
+            todo = form.save(commit=False)
+            todo.save()
+            return redirect('todo_detail', pk=todo.pk)
+    else:
+        form =TodoForm(instance=todo)
+    return render(request, 'blog/form/todo_edit.html', {'form': form})
 
 def wish(request):
     wishs=Wish.objects.filter(date__lte=timezone.now()).order_by('date')

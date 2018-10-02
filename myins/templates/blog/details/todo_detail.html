@@ -7,7 +7,9 @@
         {{ todo.date}}
       </div>
     {% endif %}
+    <a href="{% url 'todo_edit' pk=todo.pk %}">Edit this Todo!</a>
     <h1>{{ todo.title}}</h1>
     <p>{{todo.text|linebreaksbr}}</p>
+    <p>Due Date  :  {{todo.duedate|linebreaksbr}}</p>
   </div>
 {% endblock %}

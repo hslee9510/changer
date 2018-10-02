@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^trophy/(?P<pk>\d+)/$',views.trophy_detail,name='trophy_detail'),
     url(r'^daily/new/$',views.daily_new,name='daily_new'),
     url(r'^daily/(?P<pk>\d+)/edit/$', views.daily_edit, name='daily_edit'),
+    url(r'^todo/new/$',views.todo_new,name='todo_new'),
+    url(r'^todo/(?P<pk>\d+)/edit/$', views.todo_edit, name='todo_edit'),
 ]
