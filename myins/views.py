@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.utils import timezone
 from .models import  Daily,Todo,Wish,Inspiration,Reference,Trophy
 from .forms import DailyForm, TodoForm, WishForm, InspirationForm, ReferenceForm, TrophyForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     dailys = Daily.objects.filter(date__lte=timezone.now()).order_by('date')
@@ -14,7 +15,7 @@ def daily(request):
 def daily_detail(request,pk):
     daily = get_object_or_404(Daily, pk=pk)
     return render(request, 'blog/details/daily_detail.html',{'daily':daily})
-
+@login_required
 def daily_new(request):
     if request.method == "POST":
         form = DailyForm(request.POST)
@@ -25,7 +26,7 @@ def daily_new(request):
     else:
         form = DailyForm()
     return render(request, 'blog/form/daily_edit.html', {'form': form})
-
+@login_required
 def daily_edit(request, pk):
     daily = get_object_or_404(Daily, pk=pk)
     if request.method == "POST":
@@ -37,6 +38,11 @@ def daily_edit(request, pk):
     else:
         form = DailyForm(instance=daily)
     return render(request, 'blog/form/daily_edit.html', {'form': form})
+@login_required
+def daily_remove(request, pk):
+    daily = get_object_or_404(Daily, pk=pk)
+    daily.delete()
+    return redirect('daily')
 
 def todo(request):
     todos=Todo.objects.filter(date__lte=timezone.now()).order_by('date')
@@ -45,7 +51,7 @@ def todo(request):
 def todo_detail(request,pk):
     todo = get_object_or_404(Todo, pk=pk)
     return render(request, 'blog/details/todo_detail.html',{'todo':todo})
-
+@login_required
 def todo_new(request):
     if request.method == "POST":
         form = TodoForm(request.POST)
@@ -56,7 +62,7 @@ def todo_new(request):
     else:
         form = TodoForm()
     return render(request, 'blog/form/todo_edit.html', {'form': form})
-
+@login_required
 def todo_edit(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == "POST":
@@ -76,7 +82,7 @@ def wish(request):
 def wish_detail(request,pk):
     wish = get_object_or_404(Wish, pk=pk)
     return render(request, 'blog/details/wish_detail.html',{'wish':wish})
-
+@login_required
 def wish_new(request):
     if request.method == "POST":
         form = WishForm(request.POST)
@@ -87,7 +93,7 @@ def wish_new(request):
     else:
         form = WishForm()
     return render(request, 'blog/form/wish_edit.html', {'form': form})
-
+@login_required
 def wish_edit(request, pk):
     wish = get_object_or_404(Wish, pk=pk)
     if request.method == "POST":
@@ -107,7 +113,7 @@ def inspiration(request):
 def inspiration_detail(request,pk):
     inspiration = get_object_or_404(Inspiration, pk=pk)
     return render(request, 'blog/details/inspiration_detail.html',{'inspiration':inspiration})
-
+@login_required
 def inspiration_new(request):
     if request.method == "POST":
         form = InspirationForm(request.POST)
@@ -118,7 +124,7 @@ def inspiration_new(request):
     else:
         form = InspirationForm()
     return render(request, 'blog/form/inspiration_edit.html', {'form': form})
-
+@login_required
 def inspiration_edit(request, pk):
     inspiration = get_object_or_404(Inspiration, pk=pk)
     if request.method == "POST":
@@ -138,7 +144,7 @@ def reference(request):
 def reference_detail(request,pk):
     reference = get_object_or_404(Reference, pk=pk)
     return render(request, 'blog/details/reference_detail.html',{'reference':reference})
-
+@login_required
 def reference_new(request):
     if request.method == "POST":
         form = ReferenceForm(request.POST)
@@ -149,7 +155,7 @@ def reference_new(request):
     else:
         form = ReferenceForm()
     return render(request, 'blog/form/reference_edit.html', {'form': form})
-
+@login_required
 def reference_edit(request, pk):
     reference = get_object_or_404(Reference, pk=pk)
     if request.method == "POST":
@@ -169,7 +175,7 @@ def trophy(request):
 def trophy_detail(request,pk):
     trophy = get_object_or_404(Trophy, pk=pk)
     return render(request, 'blog/details/trophy_detail.html',{'trophy':trophy})
-
+@login_required
 def trophy_new(request):
     if request.method == "POST":
         form = TrophyForm(request.POST)
@@ -180,7 +186,7 @@ def trophy_new(request):
     else:
         form = TrophyForm()
     return render(request, 'blog/form/trophy_edit.html', {'form': form})
-
+@login_required
 def trophy_edit(request, pk):
     trophy = get_object_or_404(Trophy, pk=pk)
     if request.method == "POST":

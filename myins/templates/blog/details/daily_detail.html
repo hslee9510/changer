@@ -8,6 +8,8 @@
       </div>
     {% endif %}
     <a href="{% url 'daily_edit' pk=daily.pk %}">Edit this daily!</a>
+    <br></br>
+    <a class="btn btn-default" href="{% url 'daily_remove' pk=daily.pk %}">Remove this daily!</a>
     <h1>{{ daily.title}}</h1>
     <p>{{daily.text|linebreaksbr}}</p>
   </div>
