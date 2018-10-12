@@ -12,13 +12,13 @@ class Daily(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
-class Todo(models.Model):
+        return '%s by %s' %(self.title,self.text)
+class Todo_Trophy(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
     success = models.BooleanField(default=False)
-    date = models.DateTimeField(default=timezone.now)
-    duedate = models.DateTimeField(null=True)
+    date = models.DateField(default=timezone.now)
+    duedate = models.DateField(null=True)
     def publish(self):
         self.save()
 

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Daily,Todo,Wish, Inspiration,Reference,Trophy
+from .models import Daily,Todo_Trophy,Wish, Inspiration,Reference,Trophy
 
 class DailyForm(forms.ModelForm):
 
@@ -8,11 +8,11 @@ class DailyForm(forms.ModelForm):
         model = Daily
         fields = ('title','text')
 
-class TodoForm(forms.ModelForm):
+class Todo_TrophyForm(forms.ModelForm):
 
     class Meta:
-        model = Todo
-        fields = ('title','text','duedate')
+        model = Todo_Trophy
+        fields = ('title','text','duedate','success')
 
 class WishForm(forms.ModelForm):
 

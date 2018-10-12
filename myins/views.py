@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.utils import timezone
-from .models import  Daily,Todo,Wish,Inspiration,Reference,Trophy
-from .forms import DailyForm, TodoForm, WishForm, InspirationForm, ReferenceForm, TrophyForm
+from .models import  Daily,Todo_Trophy,Wish,Inspiration,Reference,Trophy
+from .forms import DailyForm, Todo_TrophyForm, WishForm, InspirationForm, ReferenceForm, TrophyForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -45,34 +45,34 @@ def daily_remove(request, pk):
     return redirect('daily')
 
 def todo(request):
-    todos=Todo.objects.filter(date__lte=timezone.now()).order_by('date')
+    todos=Todo_Trophy.objects.filter(success=False).order_by('date')
     return render(request, 'blog/todo.html',{'todos':todos})
 
 def todo_detail(request,pk):
-    todo = get_object_or_404(Todo, pk=pk)
+    todo = get_object_or_404(Todo_Trophy, pk=pk)
     return render(request, 'blog/details/todo_detail.html',{'todo':todo})
 @login_required
 def todo_new(request):
     if request.method == "POST":
-        form = TodoForm(request.POST)
+        form = Todo_TrophyForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
             return redirect('todo_detail', pk=post.pk)
     else:
-        form = TodoForm()
+        form = Todo_TrophyForm()
     return render(request, 'blog/form/todo_edit.html', {'form': form})
 @login_required
 def todo_edit(request, pk):
-    todo = get_object_or_404(Todo, pk=pk)
+    todo_trophy = get_object_or_404(Todo_Trophy, pk=pk)
     if request.method == "POST":
-        form = TodoForm(request.POST, instance=todo)
+        form = Todo_TrophyForm(request.POST, instance=todo_trophy)
         if form.is_valid():
-            todo = form.save(commit=False)
-            todo.save()
-            return redirect('todo_detail', pk=todo.pk)
+            todo_trophy = form.save(commit=False)
+            todo_trophy.save()
+            return redirect('todo_detail', pk=todo_trophy.pk)
     else:
-        form =TodoForm(instance=todo)
+        form =Todo_TrophyForm(instance=todo_trophy)
     return render(request, 'blog/form/todo_edit.html', {'form': form})
 
 def wish(request):
@@ -169,32 +169,32 @@ def reference_edit(request, pk):
     return render(request, 'blog/form/reference_edit.html', {'form': form})
 
 def trophy(request):
-    trophys = Trophy.objects.filter(date__lte=timezone.now()).order_by('date')
+    trophys = Todo_Trophy.objects.filter(success=True).order_by('date')
     return render(request, 'blog/trophy.html',{'trophys':trophys})
 
 def trophy_detail(request,pk):
-    trophy = get_object_or_404(Trophy, pk=pk)
+    trophy = get_object_or_404(Todo_Trophy, pk=pk)
     return render(request, 'blog/details/trophy_detail.html',{'trophy':trophy})
 @login_required
 def trophy_new(request):
     if request.method == "POST":
-        form = TrophyForm(request.POST)
+        form = Todo_TrophyForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
             return redirect('trophy_detail', pk=post.pk)
     else:
-        form = TrophyForm()
+        form = Todo_TrophyForm()
     return render(request, 'blog/form/trophy_edit.html', {'form': form})
 @login_required
 def trophy_edit(request, pk):
-    trophy = get_object_or_404(Trophy, pk=pk)
+    todo_trophy = get_object_or_404(Todo_Trophy, pk=pk)
     if request.method == "POST":
-        form = TrophyForm(request.POST, instance=trophy)
+        form = Todo_TrophyForm(request.POST, instance=todo_trophy)
         if form.is_valid():
-            trophy = form.save(commit=False)
-            trophy.save()
-            return redirect('trophy_detail', pk=trophy.pk)
+            todo_trophy = form.save(commit=False)
+            todo_trophy.save()
+            return redirect('trophy_detail', pk=todo_trophy.pk)
     else:
-        form =TrophyForm(instance=trophy)
+        form =Todo_TrophyForm(instance=todo_trophy)
     return render(request, 'blog/form/trophy_edit.html', {'form': form})
